@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./routes/Login";
+import Toast from "./UI/Toast";
+import Home from "./routes/Home";
+import { ProtectedRoute } from "./UI/ProtectedRoute";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { checkUser } from "./store/actions/auth";
+import { UnprotectedRoute } from "./UI/UnprotectedRoute";
+import Collections from "./routes/Collections";
+import ResponsiveAppBar from "./UI/ResponsiveAppBar";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(checkUser());
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      <BrowserRouter>
+        <ResponsiveAppBar />
+        <Routes>
+          <Route path="/" element={<ProtectedRoute children={<Home />} />} />
+          <Route
+            path="/collections"
+            element={<ProtectedRoute children={<Collections />} />}
+          />
+          <Route
+            path="/login"
+            element={<UnprotectedRoute children={<Login />} />}
+          />
+        </Routes>
+      </BrowserRouter>
+      <Toast />
     </div>
   );
 }
