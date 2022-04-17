@@ -5,20 +5,21 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
 import { contentsActions } from "../../store/slices/contents";
 import {
   deleteCollection,
   getCollections,
 } from "../../store/actions/collections";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import ConfirmDialog from "../ConfirmDialog";
 
 export default function CollectionsTable() {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.contents.collections);
+  const { data, nextToken, loading } = useSelector(
+    (state) => state.contents.collections
+  );
   const [showModal, setShowModal] = React.useState(null);
   const handleDelete = (id) => {
     dispatch(deleteCollection(id, handleClose));
@@ -28,9 +29,11 @@ export default function CollectionsTable() {
   };
 
   React.useEffect(() => {
-    if (data === null) dispatch(getCollections());
+    dispatch(getCollections(true));
   }, []);
-
+  const loadMore = () => {
+    dispatch(getCollections());
+  };
   return (
     <TableContainer>
       <Table sx={{ minWidth: 650 }}>
@@ -48,7 +51,7 @@ export default function CollectionsTable() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.title}
+                  {row.title} ({row?.images?.items?.length || 0})
                 </TableCell>
                 <TableCell component="th" scope="row" align="right">
                   <IconButton
@@ -85,6 +88,11 @@ export default function CollectionsTable() {
           onClose={() => setShowModal(null)}
         />
       </Table>
+      {nextToken && (
+        <Button onClick={loadMore} disabled={loading} variant="contained">
+          {loading ? "LOADING..." : "LOAD MORE"}
+        </Button>
+      )}
     </TableContainer>
   );
 }

@@ -1,10 +1,10 @@
 import React from "react";
-import Collecttions from "../UI/Collections";
+import CollectionComponent from "../UI/Collections";
 
 export default function Collections() {
   return (
     <div>
-      <Collecttions />
+      <CollectionComponent />
     </div>
   );
 }

@@ -9,6 +9,8 @@ import { checkUser } from "./store/actions/auth";
 import { UnprotectedRoute } from "./UI/UnprotectedRoute";
 import Collections from "./routes/Collections";
 import ResponsiveAppBar from "./UI/ResponsiveAppBar";
+import Images from "./routes/Images";
+import Logout from "./routes/Logout";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +26,14 @@ function App() {
           <Route
             path="/collections"
             element={<ProtectedRoute children={<Collections />} />}
+          />
+          <Route
+            path="/images"
+            element={<ProtectedRoute children={<Images />} />}
+          />
+          <Route
+            path="/logout"
+            element={<ProtectedRoute children={<Logout />} />}
           />
           <Route
             path="/login"

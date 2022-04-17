@@ -15,6 +15,27 @@ type User
   name: String!
   email: String!
   username: String!
+  pushToken: String
+}
+
+type Notifications
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      {
+        allow: groups
+        groups: ["Admins"]
+        operations: [create, update, read, delete]
+      }
+      { allow: groups, groups: ["Users"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  senderID: ID!
+  sender: User @hasOne(fields: ["senderID"])
+  receiverID: ID!
+  receiver: User @hasOne(fields: ["receiverID"])
 }
 
 type Collections

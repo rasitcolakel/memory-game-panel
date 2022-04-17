@@ -27,7 +27,13 @@ const pages = [
     path: "/users",
   },
 ];
-const settings = ["Account", "Logout"];
+const settings = [
+  {
+    title: "Account",
+    path: "/account",
+  },
+  { title: "Logout", path: "/logout" },
+];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -148,8 +154,13 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem
+                  key={setting.path}
+                  onClick={handleCloseUserMenu}
+                  component={Link}
+                  to={setting.path}
+                >
+                  <Typography textAlign="center">{setting.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>

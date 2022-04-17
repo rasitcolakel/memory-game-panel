@@ -10,20 +10,18 @@ import { contentsActions } from "../../store/slices/contents";
 import CustomInput from "../CustomInput";
 import { useForm } from "react-hook-form";
 import Slide from "@mui/material/Slide";
+import { API, graphqlOperation } from "aws-amplify";
+import { createCollections } from "../../graphql/mutations";
 import {
   createCollection,
   updateCollection,
 } from "../../store/actions/collections";
-import { getImages } from "../../store/actions/image";
-import ImagePicker from "../ImagePicker";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function Modal() {
   const { modal } = useSelector((state) => state.contents.collections);
-  const images = useSelector((state) => state.contents.images);
-
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(contentsActions.hideCollectionModal());
@@ -47,41 +45,10 @@ export default function Modal() {
     }
     reset({ title: "" });
   }, [modal]);
-
-  React.useEffect(() => {
-    if (images.data === null) {
-      dispatch(getImages());
-    }
-  }, []);
-  const [selected, setSelected] = React.useState(
-    modal.collection
-      ? modal.collection.images.items.length > 0
-        ? modal.collection.images.items.map((item) => item.image.url)
-        : []
-      : []
-  );
-  const selectImage = (id) => {
-    if (selected.includes(id)) {
-      setSelected(selected.filter((i) => i !== id));
-    } else {
-      setSelected([...selected, id]);
-    }
-  };
-
-  React.useEffect(() => {
-    setSelected(
-      modal.collection
-        ? modal.collection.images.items.length > 0
-          ? modal.collection.images.items.map((item) => item.image.id)
-          : []
-        : []
-    );
-  }, [modal.collection]);
   const createPressed = async (data) => {
     if (modal?.collection?.title) {
       data.id = modal?.collection?.id;
-      data.images = modal?.collection?.images;
-      dispatch(updateCollection(data, selected, reset));
+      dispatch(updateCollection(data, reset));
     } else {
       dispatch(createCollection(data, reset));
     }
@@ -120,9 +87,6 @@ export default function Modal() {
               },
             }}
           />
-          {modal.mode === "update" && (
-            <ImagePicker selectImage={selectImage} selected={selected} />
-          )}
         </DialogContentText>
       </DialogContent>
       <DialogActions style={{ justifyContent: "space-between" }}>

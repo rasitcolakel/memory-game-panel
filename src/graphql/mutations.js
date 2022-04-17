@@ -11,6 +11,7 @@ export const createUser = /* GraphQL */ `
       name
       email
       username
+      pushToken
       createdAt
       updatedAt
       owner
@@ -27,6 +28,7 @@ export const updateUser = /* GraphQL */ `
       name
       email
       username
+      pushToken
       createdAt
       updatedAt
       owner
@@ -43,6 +45,144 @@ export const deleteUser = /* GraphQL */ `
       name
       email
       username
+      pushToken
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createNotifications = /* GraphQL */ `
+  mutation CreateNotifications(
+    $input: CreateNotificationsInput!
+    $condition: ModelNotificationsConditionInput
+  ) {
+    createNotifications(input: $input, condition: $condition) {
+      id
+      senderID
+      sender {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      receiverID
+      receiver {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateNotifications = /* GraphQL */ `
+  mutation UpdateNotifications(
+    $input: UpdateNotificationsInput!
+    $condition: ModelNotificationsConditionInput
+  ) {
+    updateNotifications(input: $input, condition: $condition) {
+      id
+      senderID
+      sender {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      receiverID
+      receiver {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const ınsertNotification = /* GraphQL */ `
+  mutation InsertNotification($id: ID!) {
+    insertNotification(id: $id) {
+      id
+      senderID
+      sender {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      receiverID
+      receiver {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteNotifications = /* GraphQL */ `
+  mutation DeleteNotifications(
+    $input: DeleteNotificationsInput!
+    $condition: ModelNotificationsConditionInput
+  ) {
+    deleteNotifications(input: $input, condition: $condition) {
+      id
+      senderID
+      sender {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      receiverID
+      receiver {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       owner
@@ -73,6 +213,7 @@ export const createCollections = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -93,12 +234,11 @@ export const updateCollections = /* GraphQL */ `
       images {
         items {
           id
-          collectionsID
-          imageID
-          createdAt
-          updatedAt
+          image {
+            url
+            id
+          }
         }
-        nextToken
       }
       userID
       user {
@@ -106,6 +246,7 @@ export const updateCollections = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -139,6 +280,7 @@ export const deleteCollections = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -172,6 +314,7 @@ export const createImage = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -205,6 +348,7 @@ export const updateImage = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -238,6 +382,7 @@ export const deleteImage = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -262,6 +407,7 @@ export const createLevels = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -286,6 +432,7 @@ export const updateLevels = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -310,6 +457,7 @@ export const deleteLevels = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -340,6 +488,7 @@ export const createImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -359,6 +508,7 @@ export const createImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -392,6 +542,7 @@ export const updateImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -411,6 +562,7 @@ export const updateImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -430,48 +582,6 @@ export const deleteImageCollections = /* GraphQL */ `
   ) {
     deleteImageCollections(input: $input, condition: $condition) {
       id
-      collectionsID
-      imageID
-      collections {
-        id
-        title
-        images {
-          nextToken
-        }
-        userID
-        user {
-          id
-          name
-          email
-          username
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-      }
-      image {
-        id
-        url
-        collections {
-          nextToken
-        }
-        userID
-        user {
-          id
-          name
-          email
-          username
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
     }
   }
 `;

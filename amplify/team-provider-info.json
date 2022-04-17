@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "MemoryGame": {}
+        "MemoryGame": {},
+        "true": {}
       },
       "function": {
         "addUserToUsersGroup": {

@@ -8,6 +8,7 @@ export const getUser = /* GraphQL */ `
       name
       email
       username
+      pushToken
       createdAt
       updatedAt
       owner
@@ -26,6 +27,78 @@ export const listUsers = /* GraphQL */ `
         name
         email
         username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getNotifications = /* GraphQL */ `
+  query GetNotifications($id: ID!) {
+    getNotifications(id: $id) {
+      id
+      senderID
+      sender {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      receiverID
+      receiver {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listNotifications = /* GraphQL */ `
+  query ListNotifications(
+    $filter: ModelNotificationsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        senderID
+        sender {
+          id
+          name
+          email
+          username
+          pushToken
+          createdAt
+          updatedAt
+          owner
+        }
+        receiverID
+        receiver {
+          id
+          name
+          email
+          username
+          pushToken
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
@@ -55,6 +128,7 @@ export const getCollections = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -75,7 +149,13 @@ export const listCollections = /* GraphQL */ `
         id
         title
         images {
-          nextToken
+          items {
+            id
+            image {
+              url
+              id
+            }
+          }
         }
         userID
         user {
@@ -83,6 +163,7 @@ export const listCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -115,6 +196,7 @@ export const getImage = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -135,18 +217,12 @@ export const listImages = /* GraphQL */ `
         id
         url
         collections {
-          nextToken
+          items {
+            id
+            collectionsID
+          }
         }
         userID
-        user {
-          id
-          name
-          email
-          username
-          createdAt
-          updatedAt
-          owner
-        }
         createdAt
         updatedAt
       }
@@ -166,6 +242,7 @@ export const getLevels = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -192,6 +269,7 @@ export const listLevels = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -221,6 +299,7 @@ export const getImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -231,21 +310,6 @@ export const getImageCollections = /* GraphQL */ `
       image {
         id
         url
-        collections {
-          nextToken
-        }
-        userID
-        user {
-          id
-          name
-          email
-          username
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt

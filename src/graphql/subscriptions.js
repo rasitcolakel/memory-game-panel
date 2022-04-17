@@ -8,6 +8,7 @@ export const onCreateUser = /* GraphQL */ `
       name
       email
       username
+      pushToken
       createdAt
       updatedAt
       owner
@@ -21,6 +22,7 @@ export const onUpdateUser = /* GraphQL */ `
       name
       email
       username
+      pushToken
       createdAt
       updatedAt
       owner
@@ -34,6 +36,103 @@ export const onDeleteUser = /* GraphQL */ `
       name
       email
       username
+      pushToken
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateNotifications = /* GraphQL */ `
+  subscription OnCreateNotifications($owner: String) {
+    onCreateNotifications(owner: $owner) {
+      id
+      senderID
+      sender {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      receiverID
+      receiver {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateNotifications = /* GraphQL */ `
+  subscription OnUpdateNotifications($owner: String) {
+    onUpdateNotifications(owner: $owner) {
+      id
+      senderID
+      sender {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      receiverID
+      receiver {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteNotifications = /* GraphQL */ `
+  subscription OnDeleteNotifications($owner: String) {
+    onDeleteNotifications(owner: $owner) {
+      id
+      senderID
+      sender {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
+      receiverID
+      receiver {
+        id
+        name
+        email
+        username
+        pushToken
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       owner
@@ -61,6 +160,7 @@ export const onCreateCollections = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -91,6 +191,7 @@ export const onUpdateCollections = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -121,6 +222,7 @@ export const onDeleteCollections = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -151,6 +253,7 @@ export const onCreateImage = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -181,6 +284,7 @@ export const onUpdateImage = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -211,6 +315,7 @@ export const onDeleteImage = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -232,6 +337,7 @@ export const onCreateLevels = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -253,6 +359,7 @@ export const onUpdateLevels = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -274,6 +381,7 @@ export const onDeleteLevels = /* GraphQL */ `
         name
         email
         username
+        pushToken
         createdAt
         updatedAt
         owner
@@ -301,6 +409,7 @@ export const onCreateImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -320,6 +429,7 @@ export const onCreateImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -350,6 +460,7 @@ export const onUpdateImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -369,6 +480,7 @@ export const onUpdateImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -399,6 +511,7 @@ export const onDeleteImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner
@@ -418,6 +531,7 @@ export const onDeleteImageCollections = /* GraphQL */ `
           name
           email
           username
+          pushToken
           createdAt
           updatedAt
           owner

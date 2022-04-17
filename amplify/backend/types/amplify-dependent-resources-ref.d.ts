@@ -12,6 +12,7 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "api": {
         "MemoryGameGraphQL": {
+            "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
@@ -22,6 +23,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        }
+    },
+    "storage": {
+        "MemoryGameS3": {
+            "BucketName": "string",
+            "Region": "string"
         }
     }
 }
