@@ -15,7 +15,7 @@ type User
   name: String!
   email: String!
   username: String!
-  pushToken: String
+  isNotificationsAccepted: Boolean @default(value: "false")
 }
 
 type Notifications
@@ -92,5 +92,27 @@ type Levels
   number: Int
   gameRules: AWSJSON
   userID: ID!
+  user: User @hasOne(fields: ["userID"])
+}
+
+type PushToken
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      {
+        allow: groups
+        groups: ["Admins"]
+        operations: [create, update, read, delete]
+      }
+      {
+        allow: groups
+        groups: ["Users"]
+        operations: [create, update, read, delete]
+      }
+    ]
+  ) {
+  pushToken: String!
+  userID: ID! @primaryKey
   user: User @hasOne(fields: ["userID"])
 }

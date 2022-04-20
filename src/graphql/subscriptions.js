@@ -8,7 +8,7 @@ export const onCreateUser = /* GraphQL */ `
       name
       email
       username
-      pushToken
+      isNotificationsAccepted
       createdAt
       updatedAt
       owner
@@ -22,7 +22,7 @@ export const onUpdateUser = /* GraphQL */ `
       name
       email
       username
-      pushToken
+      isNotificationsAccepted
       createdAt
       updatedAt
       owner
@@ -36,7 +36,7 @@ export const onDeleteUser = /* GraphQL */ `
       name
       email
       username
-      pushToken
+      isNotificationsAccepted
       createdAt
       updatedAt
       owner
@@ -53,7 +53,7 @@ export const onCreateNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -64,7 +64,7 @@ export const onCreateNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -85,7 +85,7 @@ export const onUpdateNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -96,7 +96,7 @@ export const onUpdateNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -117,7 +117,7 @@ export const onDeleteNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -128,7 +128,7 @@ export const onDeleteNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -160,7 +160,7 @@ export const onCreateCollections = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -191,7 +191,7 @@ export const onUpdateCollections = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -222,7 +222,7 @@ export const onDeleteCollections = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -253,7 +253,7 @@ export const onCreateImage = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -284,7 +284,7 @@ export const onUpdateImage = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -315,7 +315,7 @@ export const onDeleteImage = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -337,7 +337,7 @@ export const onCreateLevels = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -359,7 +359,7 @@ export const onUpdateLevels = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -381,13 +381,76 @@ export const onDeleteLevels = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreatePushToken = /* GraphQL */ `
+  subscription OnCreatePushToken($owner: String) {
+    onCreatePushToken(owner: $owner) {
+      pushToken
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdatePushToken = /* GraphQL */ `
+  subscription OnUpdatePushToken($owner: String) {
+    onUpdatePushToken(owner: $owner) {
+      pushToken
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeletePushToken = /* GraphQL */ `
+  subscription OnDeletePushToken($owner: String) {
+    onDeletePushToken(owner: $owner) {
+      pushToken
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -409,7 +472,7 @@ export const onCreateImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -429,7 +492,7 @@ export const onCreateImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -460,7 +523,7 @@ export const onUpdateImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -480,7 +543,7 @@ export const onUpdateImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -511,7 +574,7 @@ export const onDeleteImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -531,7 +594,7 @@ export const onDeleteImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner

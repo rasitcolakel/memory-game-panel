@@ -1,13 +1,8 @@
 import { Auth, API, graphqlOperation, Storage } from "aws-amplify";
 import { uiActions } from "../slices/ui";
 import store from "../index";
-import {
-  createImage,
-  deleteImage,
-  deleteImageCollections,
-  updateImage,
-} from "../../graphql/mutations";
-import { listImages } from "../../graphql/queries";
+import { createImage, deleteImage, updateImage } from "../../graphql/mutations";
+import { deleteImageCollections, listImages } from "../../customGraphql/index";
 import { contentsActions } from "../slices/contents";
 import { v4 as uuidv4 } from "uuid";
 

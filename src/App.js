@@ -11,6 +11,7 @@ import Collections from "./routes/Collections";
 import ResponsiveAppBar from "./UI/ResponsiveAppBar";
 import Images from "./routes/Images";
 import Logout from "./routes/Logout";
+import Users from "./routes/Users";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,10 @@ function App() {
           <Route
             path="/images"
             element={<ProtectedRoute children={<Images />} />}
+          />
+          <Route
+            path="/users"
+            element={<ProtectedRoute children={<Users />} />}
           />
           <Route
             path="/logout"

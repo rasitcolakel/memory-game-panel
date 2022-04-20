@@ -11,7 +11,7 @@ export const createUser = /* GraphQL */ `
       name
       email
       username
-      pushToken
+      isNotificationsAccepted
       createdAt
       updatedAt
       owner
@@ -28,7 +28,7 @@ export const updateUser = /* GraphQL */ `
       name
       email
       username
-      pushToken
+      isNotificationsAccepted
       createdAt
       updatedAt
       owner
@@ -45,7 +45,7 @@ export const deleteUser = /* GraphQL */ `
       name
       email
       username
-      pushToken
+      isNotificationsAccepted
       createdAt
       updatedAt
       owner
@@ -65,7 +65,7 @@ export const createNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -76,7 +76,7 @@ export const createNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -100,7 +100,7 @@ export const updateNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -111,39 +111,7 @@ export const updateNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const ınsertNotification = /* GraphQL */ `
-  mutation InsertNotification($id: ID!) {
-    insertNotification(id: $id) {
-      id
-      senderID
-      sender {
-        id
-        name
-        email
-        username
-        pushToken
-        createdAt
-        updatedAt
-        owner
-      }
-      receiverID
-      receiver {
-        id
-        name
-        email
-        username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -167,7 +135,7 @@ export const deleteNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -178,7 +146,7 @@ export const deleteNotifications = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -213,7 +181,7 @@ export const createCollections = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -234,11 +202,12 @@ export const updateCollections = /* GraphQL */ `
       images {
         items {
           id
-          image {
-            url
-            id
-          }
+          collectionsID
+          imageID
+          createdAt
+          updatedAt
         }
+        nextToken
       }
       userID
       user {
@@ -246,7 +215,7 @@ export const updateCollections = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -280,7 +249,7 @@ export const deleteCollections = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -314,7 +283,7 @@ export const createImage = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -348,7 +317,7 @@ export const updateImage = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -382,7 +351,7 @@ export const deleteImage = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -407,7 +376,7 @@ export const createLevels = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -432,7 +401,7 @@ export const updateLevels = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
@@ -457,13 +426,85 @@ export const deleteLevels = /* GraphQL */ `
         name
         email
         username
-        pushToken
+        isNotificationsAccepted
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createPushToken = /* GraphQL */ `
+  mutation CreatePushToken(
+    $input: CreatePushTokenInput!
+    $condition: ModelPushTokenConditionInput
+  ) {
+    createPushToken(input: $input, condition: $condition) {
+      pushToken
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updatePushToken = /* GraphQL */ `
+  mutation UpdatePushToken(
+    $input: UpdatePushTokenInput!
+    $condition: ModelPushTokenConditionInput
+  ) {
+    updatePushToken(input: $input, condition: $condition) {
+      pushToken
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deletePushToken = /* GraphQL */ `
+  mutation DeletePushToken(
+    $input: DeletePushTokenInput!
+    $condition: ModelPushTokenConditionInput
+  ) {
+    deletePushToken(input: $input, condition: $condition) {
+      pushToken
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -488,7 +529,7 @@ export const createImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -508,7 +549,7 @@ export const createImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -542,7 +583,7 @@ export const updateImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -562,7 +603,7 @@ export const updateImageCollections = /* GraphQL */ `
           name
           email
           username
-          pushToken
+          isNotificationsAccepted
           createdAt
           updatedAt
           owner
@@ -582,6 +623,50 @@ export const deleteImageCollections = /* GraphQL */ `
   ) {
     deleteImageCollections(input: $input, condition: $condition) {
       id
+      collectionsID
+      imageID
+      collections {
+        id
+        title
+        images {
+          nextToken
+        }
+        userID
+        user {
+          id
+          name
+          email
+          username
+          isNotificationsAccepted
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+      }
+      image {
+        id
+        url
+        collections {
+          nextToken
+        }
+        userID
+        user {
+          id
+          name
+          email
+          username
+          isNotificationsAccepted
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
   }
 `;

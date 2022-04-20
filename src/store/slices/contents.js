@@ -12,6 +12,17 @@ let initialState = {
     loading: false,
     nextToken: null,
   },
+  users: {
+    data: null,
+    page: 0,
+    modal: {
+      visible: false,
+      mode: null,
+      collection: null,
+    },
+    loading: false,
+    nextToken: null,
+  },
   images: {
     data: null,
     page: 0,
@@ -131,6 +142,33 @@ const slice = createSlice({
     },
     setImageLoading(state, actions) {
       state.images.loading = actions.payload.loading;
+    },
+    // User Reducers
+    showUserModal(state, action) {
+      state.users.modal = {
+        ...state.users.modal,
+        ...action.payload.modal,
+      };
+    },
+    hideUserModal(state, action) {
+      state.users.modal = { ...initialState.users.modal };
+    },
+    resetUsers(state) {
+      state.users = {
+        ...initialState.users,
+      };
+    },
+    setUsers(state, actions) {
+      state.users.nextToken = actions.payload.nextToken;
+      if (state.users.data === null) {
+        state.users.data = actions.payload.data;
+        return;
+      }
+      state.users.data = [...state.users.data, ...actions.payload.data];
+    },
+
+    setUserLoading(state, actions) {
+      state.users.loading = actions.payload.loading;
     },
   },
 });

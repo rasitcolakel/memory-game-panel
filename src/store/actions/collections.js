@@ -3,12 +3,14 @@ import { uiActions } from "../slices/ui";
 import store from "../index";
 import {
   createCollections,
-  createImageCollections,
   deleteCollections,
   deleteImageCollections,
   updateCollections,
 } from "../../graphql/mutations";
-import { listCollections } from "../../graphql/queries";
+import {
+  createImageCollections,
+  listCollections,
+} from "../../customGraphql/index";
 import { contentsActions } from "../slices/contents";
 export const getCollections = (reset) => {
   return async (dispatch) => {
