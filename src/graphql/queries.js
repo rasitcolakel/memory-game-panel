@@ -282,6 +282,60 @@ export const listLevels = /* GraphQL */ `
     }
   }
 `;
+export const searchLevels = /* GraphQL */ `
+  query SearchLevels(
+    $filter: SearchableLevelsFilterInput
+    $sort: [SearchableLevelsSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableLevelsAggregationInput]
+  ) {
+    searchLevels(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        number
+        gameRules
+        userID
+        user {
+          id
+          name
+          email
+          username
+          isNotificationsAccepted
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getPushToken = /* GraphQL */ `
   query GetPushToken($userID: ID!) {
     getPushToken(userID: $userID) {

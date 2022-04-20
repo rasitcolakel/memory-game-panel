@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 import React from "react";
-import { TextField, Typography } from "@mui/material";
+import { TextField } from "@mui/material";
 
 export default function CustomInput(props) {
   return (
@@ -14,7 +14,18 @@ export default function CustomInput(props) {
           helperText={props.errors?.messages[props.errors.type]}
           fullWidth
           {...props.inputProps}
-          {...field}
+          value={
+            props.inputProps && props.inputProps?.type === "number"
+              ? Number(field.value)
+              : field.value
+          }
+          onChange={(e) => {
+            if (props.inputProps?.type === "number") {
+              field.onChange(Number(e.target.value));
+            } else {
+              field.onChange(e.target.value);
+            }
+          }}
         />
       )}
     />

@@ -78,6 +78,7 @@ type Image
 
 type Levels
   @model
+  @searchable
   @auth(
     rules: [
       {

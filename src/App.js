@@ -12,6 +12,7 @@ import ResponsiveAppBar from "./UI/ResponsiveAppBar";
 import Images from "./routes/Images";
 import Logout from "./routes/Logout";
 import Users from "./routes/Users";
+import Levels from "./routes/Levels";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,10 @@ function App() {
           <Route
             path="/users"
             element={<ProtectedRoute children={<Users />} />}
+          />
+          <Route
+            path="/levels"
+            element={<ProtectedRoute children={<Levels />} />}
           />
           <Route
             path="/logout"

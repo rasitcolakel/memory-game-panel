@@ -26,6 +26,10 @@ const pages = [
     title: "Users",
     path: "/users",
   },
+  {
+    title: "Levels",
+    path: "/levels",
+  },
 ];
 const settings = [
   {

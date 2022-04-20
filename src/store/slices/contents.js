@@ -39,6 +39,18 @@ let initialState = {
     loading: false,
     nextToken: null,
   },
+  levels: {
+    data: null,
+    page: 0,
+    modal: {
+      visible: false,
+      mode: null,
+      level: null,
+    },
+    loading: false,
+    nextToken: null,
+    total: 0,
+  },
 };
 
 const slice = createSlice({
@@ -166,9 +178,55 @@ const slice = createSlice({
       }
       state.users.data = [...state.users.data, ...actions.payload.data];
     },
-
     setUserLoading(state, actions) {
       state.users.loading = actions.payload.loading;
+    },
+    // Level Reducers
+    showLevelModal(state, action) {
+      state.levels.modal = {
+        ...state.levels.modal,
+        ...action.payload.modal,
+      };
+    },
+    hideLevelModal(state, action) {
+      state.levels.modal = { ...initialState.levels.modal };
+    },
+    resetLevels(state) {
+      state.levels = {
+        ...initialState.levels,
+      };
+    },
+    setLevels(state, actions) {
+      state.levels.nextToken = actions.payload.nextToken;
+      state.levels.total = actions.payload.total;
+      if (state.levels.data === null) {
+        state.levels.data = actions.payload.data;
+        return;
+      }
+      state.levels.data = [...state.levels.data, ...actions.payload.data];
+    },
+    addLevel(state, actions) {
+      if (state.levels.data === null) state.levels.data = [];
+      state.levels.data.push(actions.payload.level);
+    },
+    updateLevel(state, actions) {
+      state.levels.data = state.levels.data.map((level) => {
+        if (level.id === actions.payload.level.id) {
+          let gameRules = JSON.parse(actions.payload.level?.gameRules);
+          let newItem = { ...actions.payload.level, ...gameRules };
+          delete newItem?.gameRules;
+          return newItem;
+        }
+        return level;
+      });
+    },
+    deleteLevel(state, actions) {
+      state.levels.data = state.levels.data.filter(
+        (level) => level.id !== actions.payload.id
+      );
+    },
+    setLevelLoading(state, actions) {
+      state.levels.loading = actions.payload.loading;
     },
   },
 });
