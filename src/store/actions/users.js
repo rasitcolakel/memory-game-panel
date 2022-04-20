@@ -19,7 +19,7 @@ export const getUsers = (reset) => {
     );
     try {
       let variables = {
-        limit: 1,
+        limit: 20,
       };
       if (nextToken) {
         variables.nextToken = nextToken;
