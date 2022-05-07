@@ -574,6 +574,132 @@ export const onDeletePushToken = /* GraphQL */ `
     }
   }
 `;
+export const onCreateCompletedCollections = /* GraphQL */ `
+  subscription OnCreateCompletedCollections {
+    onCreateCompletedCollections {
+      id
+      collectionID
+      collection {
+        id
+        title
+        images {
+          nextToken
+        }
+        userID
+        user {
+          id
+          name
+          email
+          username
+          isNotificationsAccepted
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      rate
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCompletedCollections = /* GraphQL */ `
+  subscription OnUpdateCompletedCollections {
+    onUpdateCompletedCollections {
+      id
+      collectionID
+      collection {
+        id
+        title
+        images {
+          nextToken
+        }
+        userID
+        user {
+          id
+          name
+          email
+          username
+          isNotificationsAccepted
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      rate
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCompletedCollections = /* GraphQL */ `
+  subscription OnDeleteCompletedCollections {
+    onDeleteCompletedCollections {
+      id
+      collectionID
+      collection {
+        id
+        title
+        images {
+          nextToken
+        }
+        userID
+        user {
+          id
+          name
+          email
+          username
+          isNotificationsAccepted
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        id
+        name
+        email
+        username
+        isNotificationsAccepted
+        createdAt
+        updatedAt
+        owner
+      }
+      rate
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateImageCollections = /* GraphQL */ `
   subscription OnCreateImageCollections {
     onCreateImageCollections {
