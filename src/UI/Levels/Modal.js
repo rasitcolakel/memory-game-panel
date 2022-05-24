@@ -8,9 +8,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { contentsActions } from "../../store/slices/contents";
 import CustomInput from "../CustomInput";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Slide from "@mui/material/Slide";
 import { createLevel, updateLevel } from "../../store/actions/levels";
+import { FormControlLabel, Switch } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -36,12 +37,14 @@ export default function Modal() {
       for2Stars: 70,
       for1Stars: 50,
       seconds: 60,
+      sendPushNotification: false,
     },
   });
   React.useEffect(() => {
     if (modal?.level) {
       reset({
         ...modal?.level,
+        sendPushNotification: false,
       });
       return;
     }
@@ -52,6 +55,7 @@ export default function Modal() {
       for2Stars: 70,
       for1Stars: 50,
       seconds: 60,
+      sendPushNotification: false,
     });
   }, [modal]);
 
@@ -217,6 +221,24 @@ export default function Modal() {
               },
             }}
           />
+          {modal.mode === "create" && (
+            <Controller
+              control={control}
+              name="sendPushNotification"
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Switch
+                      name="sendPushNotification"
+                      checked={field.value ?? false}
+                      {...field}
+                    />
+                  }
+                  label="Send Notification"
+                />
+              )}
+            />
+          )}
         </DialogContentText>
       </DialogContent>
       <DialogActions style={{ justifyContent: "space-between" }}>

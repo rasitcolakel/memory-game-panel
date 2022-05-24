@@ -1,6 +1,34 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const customCreateCollection = /* GraphQL */ `
+  mutation CustomCreateCollection(
+    $title: String!
+    $userID: ID!
+    $sendPushNotification: Boolean!
+  ) {
+    customCreateCollection(
+      title: $title
+      userID: $userID
+      sendPushNotification: $sendPushNotification
+    )
+  }
+`;
+export const customCreateLevel = /* GraphQL */ `
+  mutation CustomCreateLevel(
+    $number: Int!
+    $gameRules: AWSJSON!
+    $userID: ID!
+    $sendPushNotification: Boolean!
+  ) {
+    customCreateLevel(
+      number: $number
+      gameRules: $gameRules
+      userID: $userID
+      sendPushNotification: $sendPushNotification
+    )
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!

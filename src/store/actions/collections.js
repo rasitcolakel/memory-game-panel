@@ -1,8 +1,8 @@
-import { Auth, API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { uiActions } from "../slices/ui";
 import store from "../index";
 import {
-  createCollections,
+  customCreateCollection,
   deleteCollections,
   deleteImageCollections,
   updateCollections,
@@ -66,15 +66,15 @@ export const createCollection = (data, reset) => {
     dispatch(uiActions.setLoading({ loading: true }));
     try {
       const { user } = store.getState().auth;
-      const newCollection = await API.graphql({
-        query: createCollections,
-        variables: { input: { title: data.title, userID: user.sub } },
+      await API.graphql({
+        query: customCreateCollection,
+        variables: {
+          title: data.title,
+          userID: user.sub,
+          sendPushNotification: data.sendPushNotification,
+        },
       });
-      dispatch(
-        contentsActions.addCollection({
-          collection: newCollection.data.createCollections,
-        })
-      );
+      await dispatch(getCollections(reset));
       dispatch(contentsActions.hideCollectionModal());
       dispatch(uiActions.closeToast());
       if (typeof reset === "function") reset();

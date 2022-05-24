@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { contentsActions } from "../../store/slices/contents";
 import CustomInput from "../CustomInput";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Slide from "@mui/material/Slide";
 import {
   createCollection,
@@ -16,6 +16,7 @@ import {
 } from "../../store/actions/collections";
 import { getImages } from "../../store/actions/image";
 import ImagePicker from "../ImagePicker";
+import { FormControlLabel, Switch } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -36,16 +37,18 @@ export default function Modal() {
   } = useForm({
     defaultValues: {
       title: "",
+      sendPushNotification: true,
     },
   });
   React.useEffect(() => {
     if (modal?.collection?.title) {
       reset({
         title: modal?.collection?.title,
+        sendPushNotification: false,
       });
       return;
     }
-    reset({ title: "" });
+    reset({ title: "", sendPushNotification: false });
   }, [modal]);
 
   React.useEffect(() => {
@@ -122,6 +125,24 @@ export default function Modal() {
           />
           {modal.mode === "update" && (
             <ImagePicker selectImage={selectImage} selected={selected} />
+          )}
+          {modal.mode === "create" && (
+            <Controller
+              control={control}
+              name="sendPushNotification"
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Switch
+                      name="sendPushNotification"
+                      checked={field.value ?? false}
+                      {...field}
+                    />
+                  }
+                  label="Send Notification"
+                />
+              )}
+            />
           )}
         </DialogContentText>
       </DialogContent>

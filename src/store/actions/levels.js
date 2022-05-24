@@ -1,8 +1,8 @@
-import { Auth, API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { uiActions } from "../slices/ui";
 import store from "../index";
 import {
-  createLevels,
+  customCreateLevel,
   deleteLevels,
   updateLevels,
 } from "../../graphql/mutations";
@@ -75,22 +75,12 @@ export const createLevel = (data, reset) => {
       let input = {
         number: data.number,
         userID: user.sub,
+        sendPushNotification: data.sendPushNotification,
       };
       delete data.number;
       input.gameRules = JSON.stringify(data);
-      const newLevel = await API.graphql(
-        graphqlOperation(createLevels, {
-          input,
-        })
-      );
-      let gameRules = JSON.parse(await newLevel.data.createLevels?.gameRules);
-      let newItem = { ...newLevel.data.createLevels, ...gameRules };
-      delete newItem?.gameRules;
-      dispatch(
-        contentsActions.addLevel({
-          level: newItem,
-        })
-      );
+      await API.graphql(graphqlOperation(customCreateLevel, input));
+      await dispatch(getLevels(reset));
       dispatch(contentsActions.hideLevelModal());
       dispatch(uiActions.closeToast());
       if (typeof reset === "function") reset();
